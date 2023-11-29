@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .product-details {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .back-to-main {
+            margin-top: 20px;
+        }
+
+        .back-to-main a {
+            text-decoration: none;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+
+    <div class="product-details">
+        <h2>Thank you for your purchase!</h2>
+        
+        <h3>Product Details:</h3>
+        <!-- Display the image on the confirmation page -->
+        <div id="C:\Users\sreed\OneDrive\Desktop\hp.JPG"></div>
+        <p>Name: <span id="productName"></span></p>
+        <p>Email: <span id="email"></span></p>
+        <p>Address: <span id="address"></span></p>
+    </div>
+
+    <div class="back-to-main">
+        <a href="index.html">Back to Main Page</a>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const productName = params.get('name');
+        const email = params.get('email');
+        const address = params.get('address');
+        const imageSrc = params.get('imageSrc');
+
+        document.getElementById('productName').textContent = productName;
+        document.getElementById('email').textContent = email;
+        document.getElementById('address').textContent = address;
+
+        // Display the image on the confirmation page
+        const productImage = document.createElement('img');
+        productImage.src = imageSrc;
+        productImage.alt = productName;
+        document.getElementById('productImage').appendChild(productImage);
+    </script>
+</body>
+</html>

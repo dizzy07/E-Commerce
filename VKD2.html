@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Commerce Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #000;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .checkout {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .checkout form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .checkout label {
+            margin-bottom: 8px;
+        }
+
+        .checkout input {
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        .checkout button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cart {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cart-item img {
+            max-width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .cart-item p {
+            margin: 0;
+        }
+
+        .remove-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Diagon alley</h1>
+    </header>
+    
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+        <div class="product">
+            <img src="C:\Users\sreed\OneDrive\Desktop\lap.JPG" alt="Product 1">
+            <h2>Laptop</h2>
+            <p>A laptop is a battery- or AC-powered personal computer (PC) smaller than a briefcase. </p>
+            <p>$999.99</p>
+            <button onclick="addToCart('Product 1', 19.99, 'product1.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="C:\Users\sreed\OneDrive\Desktop\ph.JPG" alt="Product 2">
+            <h2>Mobilephones</h2>
+            <p>A mobile phone is a wireless handheld device that allows users to make and receive calls.</p>
+            <p>$799.99</p>
+            <button onclick="addToCart('Product 2', 29.99, 'product2.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="C:\Users\sreed\OneDrive\Desktop\hp.JPG" alt="Product 3">
+            <h2>Headphone</h2>
+            <p>Headphones are a pair of small loudspeaker drivers worn on or around the head over a user's ears.</p>
+            <p>$89.99</p>
+            <button onclick="addToCart('Product 3', 39.99, 'product3.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="C:\Users\sreed\OneDrive\Desktop\pend.JPG" alt="Product 4">
+            <h2>Pendrive</h2>
+            <p>A pendrive is a plug-and-play portable storage device that uses flash memory and is lightweight enough to attach to a keychain</p>
+            <p>$49.99</p>
+            <button onclick="addToCart('Product 4', 49.99, 'product4.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="checkout">
+            <h2>Checkout</h2>
+            <form action="confirmation.html" method="get">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <button type="submit">Buy</button>
+            </form>
+        </div>
+
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <div class="cart-item" id="cartItem"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2023 Diagon alley
+    </footer>
+
+    <script>
+        function addToCart(productName, price, imageSrc) {
+            console.log(`Added ${productName} to the cart. Price: $${price}`);
+
+            const cartItemDiv = document.getElementById('cartItem');
+            const newItem = document.createElement('div');
+            newItem.className = 'cart-item';
+            newItem.innerHTML = `
+                <img src="${imageSrc}" alt="${productName}">
+                <p>${productName} - $${price}</p>
+                <button class="remove-btn" onclick="removeFromCart(this)">Remove</button>
+            `;
+            cartItemDiv.appendChild(newItem);
+        }
+
+        function removeFromCart(button) {
+            const cartItemDiv = button.parentElement;
+            cartItemDiv.remove();
+        }
+    </script>
+</body>
+</html>
+
+
